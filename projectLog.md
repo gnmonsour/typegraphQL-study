@@ -1,5 +1,12 @@
 # TypeGraphQL Study
 
+## 2021/03/18
+
+- installed 'ts-node-dev' package to replace nodemon, resulted in faster restart on change
+- moved FieldResolver into User class from RegisterResolver
+
+  ***
+
 ## 2021/03/17
 
 ### Setup
@@ -40,7 +47,6 @@ Using TypeOrm and Postgresql along with bcryptjs
 - needed set 'strictPropertyInitialization' to false in the tsconfig.json file to disable the compile error on the User entity class properties
 - added postgres path to environment variables
 - added a mutation, enhance User with typeorm decorators to align to graphql types
-- added user data
+- setup a FieldResolver annotation in the resolver to return a concatenation as a name field
 - query failure!! found that I mispelled synchronize in the ormconfig.json
-
--
+- added user data to test, succeeds and denies duplicate email as well
