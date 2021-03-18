@@ -14,6 +14,19 @@
 
 ### Login
 
+- installed session, cors, redis packages
+- setup session and cors middleware
+- added a redis instance used in the session store
+- added a Login Resolver
+- added a session context interface for request
+- need to define a userId type in the context
+- will need to followup with a response type in the future
+- make sure that the graphqli setting is set to 'include' for request.credentials
+  - otherwise you won't see the cookie saved via the ui request
+- tested and verified cookie was saved on a successful login
+- tested for bad email and bad password returned null for the login
+- added a resolver to retrieve the current user that will be used for authentication later
+
 ---
 
 ## 2021/03/17
