@@ -2,7 +2,9 @@
 
 ## 2021/03/17
 
-- setup node project
+### Setup
+
+- a node project
 
 ```json
   "dependencies": {
@@ -22,7 +24,22 @@
 ```
 
 - setup `tsconfig` cross-referencing typegraphql (their github) and Awad's project source
-- needed to allowSyntheticDefaultImports to use express with an import call
-- imported reflect-metadata to resolve application crashing
+
+  - set `allowSyntheticDefaultImports` to true to import express rather than require in
+
+- `reflect-metadata` needs to be first import to facilitate decorators and types implemented by `typegraphql`
+
+- ran successfully and commited
+
+### Register Resolver
+
+Using TypeOrm and Postgresql along with bcryptjs
+
+- setup ormconfig.json to define the connection properties
+- created a User entity class based on typeorm specs
+- needed set 'strictPropertyInitialization' to false in the tsconfig.json file to disable the compile error on the User entity class properties
+- added postgres path to environment variables
+- added a mutation
+- added a user
 
 -
