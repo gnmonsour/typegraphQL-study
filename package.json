@@ -4,7 +4,7 @@
   "description": "a study of implementing typegraphql",
   "main": "server.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn src/index.ts"
+    "dev": "nodemon --exec ts-node src/index.ts"
   },
   "keywords": [
     "graphql",
@@ -16,6 +16,7 @@
   "dependencies": {
     "apollo-server-express": "^2.21.1",
     "bcryptjs": "^2.4.3",
+    "class-validator": "^0.13.1",
     "express": "^4.17.1",
     "graphql": "^15.5.0",
     "pg": "^8.5.1",

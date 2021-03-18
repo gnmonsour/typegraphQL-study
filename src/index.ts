@@ -1,7 +1,8 @@
 import 'reflect-metadata';
+import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
-import { buildSchema } from 'type-graphql';
+import { ArgumentValidationError, buildSchema } from 'type-graphql';
 
 import { RegisterResolver } from './modules/user/Register';
 import { createConnection } from 'typeorm';
@@ -13,8 +14,29 @@ const main = async () => {
   const schema = await buildSchema({
     resolvers: [RegisterResolver],
   });
-  const apolloServer = new ApolloServer({ schema });
+  const apolloServer = new ApolloServer({
+    schema,
+    formatError: (error: GraphQLError): GraphQLFormattedError => {
+      if (error.originalError instanceof ArgumentValidationError) {
+        const { extensions } = error;
+        if (extensions?.exception) {
+          const { validationErrors } = extensions.exception;
+          if (validationErrors) {
+            let msg: string[] = [];
+            Object.values(validationErrors).forEach((element: any) => {
+              Object.values(element.constraints).forEach((constraint: any) => {
+                msg.push(`${constraint}`);
+              });
+            });
 
+            extensions.msg = msg;
+          }
+        }
+        return error.extensions?.msg;
+      }
+      return error;
+    },
+  });
   const app = express();
 
   apolloServer.applyMiddleware({ app });

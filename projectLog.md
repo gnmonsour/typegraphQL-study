@@ -2,10 +2,19 @@
 
 ## 2021/03/18
 
-- installed 'ts-node-dev' package to replace nodemon, resulted in faster restart on change
-- moved FieldResolver into User class from RegisterResolver
+### Validation
 
-  ***
+- ~~installed 'ts-node-dev' package to replace nodemon, resulted in faster restart on change~~ reverted, too slow
+- moved FieldResolver into User class from RegisterResolver
+- added validation
+- tried adding error formatting to the apollo server but ran into an issue with the type clashes in new version of apolloserver [see this thread](https://github.com/MichalLytek/type-graphql/issues/258)
+- formatting the validation errors was really stupid so spent a lot of time coming up with something usable
+- return an array of strings for each validation error, this may end up being extensible
+- adding a custom validation decorator to handle unique emails
+
+### Login
+
+---
 
 ## 2021/03/17
 
