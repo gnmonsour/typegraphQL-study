@@ -6,7 +6,7 @@
   "username": "gnm",
   "password": "gnmRoot",
   "database": "typegraphql-study",
-  "synchonize": true,
+  "synchronize": true,
   "logging": true,
-  "entities": ["./src/entity/*.*"]
+  "entities": ["src/entity/*.*"]
 }

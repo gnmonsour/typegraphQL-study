@@ -39,7 +39,8 @@ Using TypeOrm and Postgresql along with bcryptjs
 - created a User entity class based on typeorm specs
 - needed set 'strictPropertyInitialization' to false in the tsconfig.json file to disable the compile error on the User entity class properties
 - added postgres path to environment variables
-- added a mutation
-- added a user
+- added a mutation, enhance User with typeorm decorators to align to graphql types
+- added user data
+- query failure!! found that I mispelled synchronize in the ormconfig.json
 
 -
