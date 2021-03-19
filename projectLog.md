@@ -29,7 +29,16 @@
 
 ### Forgot Password Email
 
--
+- added 'ForgotPasswordResolver' with mutation `forgotPassword`
+- similar to ConfirmUserResolver
+- refactored the createConfirmationEndpoint to separate the confirmation from the forgotten use cases
+- changed the file name to 'createAccessEndpoints' adjusted imports
+- create redis prefix constants to separate confirmation and forgotten use cases
+- using prefixed token as the redis key but token alone in the emailed endpoint
+- adjusted RegisterResolver and ConfirmUserResolver for the redis prefixes
+- added 'ChangePassword' resolver and a ChangePasswordInput dto type
+- on ConfirmUser and ChangePassword add the prefix back to recreate the redis key
+- deleted the redis record after retreiving it
 
 - ***
 

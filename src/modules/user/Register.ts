@@ -5,7 +5,7 @@ import { RegisterInput } from './register/RegisterInput';
 import { isAuth } from '../middleware/isAuth';
 
 import { sendEmail } from '../utils/sendEmail';
-import { createConfirmationEndpoint } from '../utils/createConfirmationEndpoint';
+import { createConfirmationEndpoint } from '../utils/createAccessEndpoint';
 @Resolver(User)
 export class RegisterResolver {
   @UseMiddleware(isAuth)

@@ -13,6 +13,8 @@ import { redis } from './redis';
 import { LoginResolver } from './modules/user/Login';
 import { CurrentUserResolver } from './modules/user/CurrentUser';
 import { ConfirmUserResolver } from './modules/user/ConfirmUser';
+import { ForgotPasswordResolver } from './modules/user/ForgotPassword';
+import { ChangePasswordResolver } from './modules/user/ChangePassword';
 
 const cc = console.log;
 
@@ -25,6 +27,8 @@ const main = async () => {
       LoginResolver,
       CurrentUserResolver,
       ConfirmUserResolver,
+      ForgotPasswordResolver,
+      ChangePasswordResolver,
     ],
     authChecker: ({ context: { req } }) => {
       return !!req.session.userId;
