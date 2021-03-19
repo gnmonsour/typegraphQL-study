@@ -15,7 +15,19 @@
 
 ### Confirmation Email
 
-[NodeMailer package used](https://nodemailer.com/about/)
+- install nodemailer and uuid package
+- created 'sendEmail.ts' file at 'modules/utils'
+- created sendEmail function at same
+- ran test and previewed at [ethereal](https://ethereal.email/)
+- the mock link is provided in the terminal
+- updated the sendEmail function with email and a confirmation endpoint url
+- created a file and function to create the confirmation endpoint 'createConfirmationEndpoint.ts'
+- added the sendEmail function to the RegisterResolver `register` mutation
+- ran test in graphql playground with the register mutation, success!!
+- there is no backend server endpoint yet but can build out a confirm user resolver-mutation to begin with
+- tested the manual mutation to confirm then logged in to verify
+
+### Forgot Password Email
 
 -
 

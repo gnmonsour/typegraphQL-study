@@ -21,4 +21,11 @@ summaries to round out the tutorial
 - an auth checker function is defined then added to the schema
 - typegraphql can also be used with jwt authentication tokens
 
--
+### Confirmation Email
+
+Using the [NodeMailer](https://nodemailer.com/about/) package.
+It is open source, no dependencies.
+You can set content to text and or HTML
+The example code uses a service called [etheral](https://ethereal.email/) that is a fake smtp service. There is a good reference example on their landing page.
+
+Intrigued to see that the personal service provider is in the envelope tab!! Service deletes the message 6 hours later!

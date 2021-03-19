@@ -13,10 +13,19 @@ export class LoginResolver {
   ): Promise<User | null> {
     const user = await User.findOne({ where: { email } });
 
-    if (!user) return null;
+    if (!user) {
+      return null;
+    }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) return null;
+    if (!isValidPassword) {
+      return null;
+    }
+
+    // may want to consider throwing an error for direction
+    if (!user.confirmed) {
+      return null;
+    }
 
     ctx.req.session!.userId = user.id;
 

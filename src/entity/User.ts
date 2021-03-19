@@ -29,4 +29,7 @@ export class User extends BaseEntity {
   // not annotated with @Field; is not in schema
   @Column()
   password: string;
+
+  @Column('bool', { default: false })
+  confirmed: boolean;
 }
