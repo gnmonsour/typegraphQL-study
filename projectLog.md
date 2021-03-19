@@ -39,8 +39,15 @@
 - added 'ChangePassword' resolver and a ChangePasswordInput dto type
 - on ConfirmUser and ChangePassword add the prefix back to recreate the redis key
 - deleted the redis record after retreiving it
+- tested both with success
 
-- ***
+### Password Field
+
+- added validation to the password field
+- moved password field out into its own input class
+- extended the Register and Change Password resolver to extend the password input class
+
+  ***
 
 ## 2021/03/18
 
@@ -69,7 +76,7 @@
 - tested for bad email and bad password returned null for the login
 - added a resolver to retrieve the current user that will be used for authentication later
 
----
+  ***
 
 ## 2021/03/17
 
