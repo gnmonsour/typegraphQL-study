@@ -20,29 +20,13 @@ const main = async () => {
 
   const schema = await buildSchema({
     resolvers: [RegisterResolver, LoginResolver, CurrentUserResolver],
+    authChecker: ({ context: { req } }) => {
+      return !!req.session.userId;
+    },
   });
   const apolloServer = new ApolloServer({
     schema,
-    formatError: (error: GraphQLError): GraphQLFormattedError => {
-      if (error.originalError instanceof ArgumentValidationError) {
-        const { extensions } = error;
-        if (extensions?.exception) {
-          const { validationErrors } = extensions.exception;
-          if (validationErrors) {
-            let msg: string[] = [];
-            Object.values(validationErrors).forEach((element: any) => {
-              Object.values(element.constraints).forEach((constraint: any) => {
-                msg.push(`${constraint}`);
-              });
-            });
-
-            extensions.msg = msg;
-          }
-        }
-        return error.extensions?.msg;
-      }
-      return error;
-    },
+    formatError: validationFormatter,
     context: ({ req }: any) => ({ req }),
   });
   const app = express();
@@ -79,3 +63,24 @@ const main = async () => {
 };
 
 main().catch((err) => cc('main run error', err));
+
+const validationFormatter = (error: GraphQLError): GraphQLFormattedError => {
+  if (error.originalError instanceof ArgumentValidationError) {
+    const { extensions } = error;
+    if (extensions?.exception) {
+      const { validationErrors } = extensions.exception;
+      if (validationErrors) {
+        let msg: string[] = [];
+        Object.values(validationErrors).forEach((element: any) => {
+          Object.values(element.constraints).forEach((constraint: any) => {
+            msg.push(`${constraint}`);
+          });
+        });
+
+        extensions.msg = msg;
+      }
+    }
+    return error.extensions?.msg;
+  }
+  return error;
+};

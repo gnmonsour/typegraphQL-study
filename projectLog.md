@@ -1,5 +1,26 @@
 # TypeGraphQL Study
 
+## 2021/03/19
+
+### Authorization
+
+- working through a demo implementation with the @Authorized decorator
+- adding it to the RegisterResolver simple query 'greet'
+- add an auth check to the schema builder, stripped down
+- the error returned is not informative so an additional guard can be added with middleware
+- added an isAuth middleware function and placed it in the `@UseMiddleware` decorator
+- the isAuth middleware throws a custom error message!!
+- learned that `!!` is a cast to `Boolean` very cool
+- as well that `!.` is an assertion that the object will be defined
+
+### Confirmation Email
+
+[NodeMailer package used](https://nodemailer.com/about/)
+
+-
+
+- ***
+
 ## 2021/03/18
 
 ### Validation
