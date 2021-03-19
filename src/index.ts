@@ -15,6 +15,7 @@ import { CurrentUserResolver } from './modules/user/CurrentUser';
 import { ConfirmUserResolver } from './modules/user/ConfirmUser';
 import { ForgotPasswordResolver } from './modules/user/ForgotPassword';
 import { ChangePasswordResolver } from './modules/user/ChangePassword';
+import { LogoutResolver } from './modules/user/Logout';
 
 const cc = console.log;
 
@@ -29,6 +30,7 @@ const main = async () => {
       ConfirmUserResolver,
       ForgotPasswordResolver,
       ChangePasswordResolver,
+      LogoutResolver,
     ],
     authChecker: ({ context: { req } }) => {
       return !!req.session.userId;
@@ -37,7 +39,7 @@ const main = async () => {
   const apolloServer = new ApolloServer({
     schema,
     formatError: validationFormatter,
-    context: ({ req }: any) => ({ req }),
+    context: ({ req, res }: any) => ({ req, res }),
   });
   const app = express();
 

@@ -47,6 +47,12 @@
 - moved password field out into its own input class
 - extended the Register and Change Password resolver to extend the password input class
 
+### Logout Resolver
+
+- added 'LogoutResolver"
+- needed to update the Context interface to include the express.Response object
+- tested for cookie removal and session destroy
+
   ***
 
 ## 2021/03/18
