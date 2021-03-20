@@ -1,5 +1,37 @@
 # TypeGraphQL Study
 
+## 2021/03/20
+
+Because of a comment wrt password base class refactoring concerning mixins the following articles help
+
+[article on JS mixins](https://justinfagnani.com/2015/12/21/real-mixins-with-javascript-classes/)
+
+[article on TS mixins](https://www.typescriptlang.org/docs/handbook/mixins.html)
+
+General form of a mixin:
+
+```ts
+import { ClassType, Field, InputType } from 'type-graphql';
+
+export const OkMixin = <T extends ClassType>(BaseClass: T) => {
+  @InputType()
+  class OkInput extends BaseClass {
+    @Field()
+    ok: boolean; // trivial example
+  }
+  return OkInput;
+};
+```
+
+---
+
+- updated the RegisterResolver and the ChangePasswordResolver to use the mixin
+- we don't really need to do this because we're not inheriting more than one base class
+- although this wasn't needed it was a good study of how to do it
+- tested and worked as expected with fail and success inputs
+
+  ***
+
 ## 2021/03/19
 
 ### Authorization
