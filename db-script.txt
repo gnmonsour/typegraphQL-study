@@ -1,0 +1,39 @@
+3	jennifer	heath	jgrey@human.com	$2a$12$siovuT3dqn5bGUNKmxO8b.ytJXhQQ2t/sqmwRkMzkEk9hG1DcC3va	t
+4	donna	bush	bushbouli@human.com	$2a$12$2H1jYCqeIMRxUNykpPNWReN.4pmntaGBn3/dKRC0zLeg.KnDjNfLK	t
+5	george	bush	gb@gb.com	$2a$12$FKSdylI.eBZLHefdnkuA4uz7pVwnhJOyCF9JnNqo0uKzee22t2x5u	t
+8	george	bush	big_egg@human.com	$2a$12$9JyR8INw7MtwHHzavHMlueJDgaXmlJMIoeF2qP/vCrmISxrZANwlG	t
+6	donna	bush	gg@human.com	$2a$12$D.Dfh1oUvZBeLBqqgaQYlOovlo6zvUI7bGJgHKIr8zv30jQ0BD9.a	t
+9	george	monsour	metacadet@human.com	$2a$12$5hYnmECU111X2I70NQ036uWzun/RXvtWL4PYsuhqEgDgN8O23Pmem	t
+10	first	one	meta-one@human.com	$2a$12$zcuBmf6v2lOS3fKkgi7qO.MxfR45sDYoFH4PepV5DRrmKz/vCaS7e	t
+1	jennifer	heath	jgrey@humm.com	$2a$12$XhPP72EIdQkiKt9BFQbAgOAY0YunYYbEv0T03jb46daVE0G6p6rrm	t
+
+-- Table: public.user
+
+-- DROP TABLE public."user";
+
+CREATE TABLE public."user"
+(
+    id integer NOT NULL DEFAULT nextval('user_id_seq'::regclass),
+    "firstName" character varying COLLATE pg_catalog."default" NOT NULL,
+    "lastName" character varying COLLATE pg_catalog."default" NOT NULL,
+    email text COLLATE pg_catalog."default" NOT NULL,
+    password character varying COLLATE pg_catalog."default" NOT NULL,
+    confirmed boolean NOT NULL DEFAULT false,
+    CONSTRAINT "PK_cace4a159ff9f2512dd42373760" PRIMARY KEY (id),
+    CONSTRAINT "UQ_e12875dfb3b1d92d7d7c5377e22" UNIQUE (email)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public."user"
+    OWNER to gnm;
+
+
+    INSERT INTO public."user"(
+	id, "firstName", "lastName", email, password, confirmed)
+	VALUES (?, ?, ?, ?, ?, ?);
+
+
+  UPDATE public."user"
+	SET id=?, "firstName"=?, "lastName"=?, email=?, password=?, confirmed=?
+	WHERE <condition>;

@@ -2,40 +2,43 @@ import 'reflect-metadata';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
-import { ArgumentValidationError, buildSchema } from 'type-graphql';
+import { ArgumentValidationError } from 'type-graphql';
+// import { ArgumentValidationError, buildSchema } from 'type-graphql';
 
-import { RegisterResolver } from './modules/user/Register';
 import { createConnection } from 'typeorm';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
 import cors from 'cors';
 import { redis } from './redis';
-import { LoginResolver } from './modules/user/Login';
-import { CurrentUserResolver } from './modules/user/CurrentUser';
-import { ConfirmUserResolver } from './modules/user/ConfirmUser';
-import { ForgotPasswordResolver } from './modules/user/ForgotPassword';
-import { ChangePasswordResolver } from './modules/user/ChangePassword';
-import { LogoutResolver } from './modules/user/Logout';
+// import { RegisterResolver } from './modules/user/Register';
+// import { LoginResolver } from './modules/user/Login';
+// import { CurrentUserResolver } from './modules/user/CurrentUser';
+// import { ConfirmUserResolver } from './modules/user/ConfirmUser';
+// import { ForgotPasswordResolver } from './modules/user/ForgotPassword';
+// import { ChangePasswordResolver } from './modules/user/ChangePassword';
+// import { LogoutResolver } from './modules/user/Logout';
+import { createSchema } from './helpers/createSchema';
 
 const cc = console.log;
 
 const main = async () => {
   await createConnection();
 
-  const schema = await buildSchema({
-    resolvers: [
-      RegisterResolver,
-      LoginResolver,
-      CurrentUserResolver,
-      ConfirmUserResolver,
-      ForgotPasswordResolver,
-      ChangePasswordResolver,
-      LogoutResolver,
-    ],
-    authChecker: ({ context: { req } }) => {
-      return !!req.session.userId;
-    },
-  });
+  const schema = await createSchema();
+  // const schema = await buildSchema({
+  //   resolvers: [
+  //     RegisterResolver,
+  //     LoginResolver,
+  //     CurrentUserResolver,
+  //     ConfirmUserResolver,
+  //     ForgotPasswordResolver,
+  //     ChangePasswordResolver,
+  //     LogoutResolver,
+  //   ],
+  //   authChecker: ({ context: { req } }) => {
+  //     return !!req.session.userId;
+  //   },
+  // });
   const apolloServer = new ApolloServer({
     schema,
     formatError: validationFormatter,

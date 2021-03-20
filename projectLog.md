@@ -30,6 +30,22 @@ export const OkMixin = <T extends ClassType>(BaseClass: T) => {
 - although this wasn't needed it was a good study of how to do it
 - tested and worked as expected with fail and success inputs
 
+### Testing GraphQL Resolvers
+
+- setup environment for tests
+- integration testing call resolvers
+- comparing results with db
+- install packages `npm i -D jest typescript ts-jest @types/jest`
+- initialize a configuration file: `./node_modules/.bin/ts-jest config:init`
+- created a typeorm database configuration for testing 'testConn.ts'
+- created a 'testSetup' file that runs 'testConn' with a drop table true argument
+- this ensures that the tests run on a fresh table so inputs and outputs remain consistent
+- setup a helper method called gqall to wrap the `graphql` query command
+- refactored the `buildSchema` call into a helper `createShema` method
+- used it in the initialization for the server 'index.ts' and helper gqall setup
+- created a test file at 'modules/user/register/Register.test.ts'
+- ran test successfully, the testing setup is up and running
+
   ***
 
 ## 2021/03/19
@@ -85,7 +101,7 @@ export const OkMixin = <T extends ClassType>(BaseClass: T) => {
 - needed to update the Context interface to include the express.Response object
 - tested for cookie removal and session destroy
 
-  ***
+---
 
 ## 2021/03/18
 
@@ -114,7 +130,7 @@ export const OkMixin = <T extends ClassType>(BaseClass: T) => {
 - tested for bad email and bad password returned null for the login
 - added a resolver to retrieve the current user that will be used for authentication later
 
-  ***
+---
 
 ## 2021/03/17
 
