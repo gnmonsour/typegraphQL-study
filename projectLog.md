@@ -1,31 +1,23 @@
 # TypeGraphQL Study
 
-## 2021/03/20
+## 2021/03/21
 
-Because of a comment wrt password base class refactoring concerning mixins the following articles help
+### Testing Resolvers
 
-[article on JS mixins](https://justinfagnani.com/2015/12/21/real-mixins-with-javascript-classes/)
-
-[article on TS mixins](https://www.typescriptlang.org/docs/handbook/mixins.html)
-
-General form of a mixin:
-
-```ts
-import { ClassType, Field, InputType } from 'type-graphql';
-
-export const OkMixin = <T extends ClassType>(BaseClass: T) => {
-  @InputType()
-  class OkInput extends BaseClass {
-    @Field()
-    ok: boolean; // trivial example
-  }
-  return OkInput;
-};
-```
+- installed 'faker' package for random data feed with '@types/faker'
+- setup a **"user/test"** folder rather scattering them
+- moved **"Register.test.ts"** in
+- add **"CurrentUser.test.ts"** file to test the CurrentUserResolver
+  - the lesson is to understand how to handle the shared context object
+  - more [here](https://graphql-modules.com/docs/legacy/introduction/context/)
+  - updated the `gqall` signature to include an optional `userId` argument
+  - set a contextValue in the arguments to specify the `userId` in the query or mutation
 
 ---
 
-- updated the RegisterResolver and the ChangePasswordResolver to use the mixin
+## 2021/03/20
+
+- updated the RegisterResolver and the ChangePasswordResolver to use a password mixin
 - we don't really need to do this because we're not inheriting more than one base class
 - although this wasn't needed it was a good study of how to do it
 - tested and worked as expected with fail and success inputs
@@ -37,16 +29,21 @@ export const OkMixin = <T extends ClassType>(BaseClass: T) => {
 - comparing results with db
 - install packages `npm i -D jest typescript ts-jest @types/jest`
 - initialize a configuration file: `./node_modules/.bin/ts-jest config:init`
-- created a typeorm database configuration for testing 'testConn.ts'
-- created a 'testSetup' file that runs 'testConn' with a drop table true argument
-- this ensures that the tests run on a fresh table so inputs and outputs remain consistent
-- setup a helper method called gqall to wrap the `graphql` query command
-- refactored the `buildSchema` call into a helper `createShema` method
-- used it in the initialization for the server 'index.ts' and helper gqall setup
-- created a test file at 'modules/user/register/Register.test.ts'
-- ran test successfully, the testing setup is up and running
+- created a test database '**typegraphql-study-test**' for separation from the development db
+- exported a function `testConn` using typeorm: `createConnection` & custom testing configuration in **'testConn.ts'**
+  - `testConn` allows an argument for dropping the table when needed
+- created a 'testSetup.ts' file that runs `testConn` with drop: true
+- this ensures consistency that the tests run on a fresh table
+- setup a helper method called `gqall` to wrap the `graphql` query command
+- **to ensure parity with schema use**
+  - refactored the `buildSchema` call into a helper `createShema` method
+  - replaced the schema setup in **'index.ts'** and used it in **'gqall.ts'** for the schema setup
+  - the server is not used in **'gqall'**; this sets up the schema for calls to `graphql`
+- created a test file at **'modules/user/register/Register.test.ts'** to test the resolver that creates a new user
+- ran test successfully
+- the testing setup is up and running
 
-  ***
+---
 
 ## 2021/03/19
 

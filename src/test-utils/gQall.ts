@@ -5,10 +5,11 @@ import { createSchema } from '../helpers/createSchema';
 interface Options {
   source: string;
   variableValues?: Maybe<{ [key: string]: any }>;
+  userId?: number;
 }
 let schema: GraphQLSchema;
 
-export const gqall = async ({ source, variableValues }: Options) => {
+export const gqall = async ({ source, variableValues, userId }: Options) => {
   if (!schema) {
     schema = await createSchema();
   }
@@ -16,5 +17,9 @@ export const gqall = async ({ source, variableValues }: Options) => {
     schema,
     source,
     variableValues,
+    contextValue: {
+      req: { session: { userId } },
+      res: { clearCookie: jest.fn() },
+    },
   });
 };
